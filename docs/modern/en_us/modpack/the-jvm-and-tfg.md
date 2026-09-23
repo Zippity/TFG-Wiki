@@ -3,10 +3,9 @@ title: Improving Performance via the JVM
 order: 3
 ---
 
-- [Improving TFG Performance via Upgrading the JVM](#improving-tfg-performance-via-upgrading-the-jvm)
-  - [Why does my Java version matter and what's a "JVM"?](#why-does-my-java-version-matter-and-whats-a-jvm)
-  - [Which Java Distribution Should I Choose?](#which-java-distribution-should-i-choose)
-  - [Upgrading Java](#upgrading-java)
+- [Why does my Java version matter and what's a "JVM"?](#why-does-my-java-version-matter-and-whats-a-jvm)
+- [Which Java Distribution Should I Choose?](#which-java-distribution-should-i-choose)
+- [Upgrading Java](#upgrading-java)
     - [Prism](#prism)
     - [CurseForge](#curseforge)
 

@@ -3,50 +3,58 @@ title: Improving Performance via the JVM
 order: 3
 ---
 <style scoped>
-/* Center all figures and their captions */
+/* center figures */
 figure {
   text-align: center;
   margin: 1.5rem auto;
 }
 
+/* center figure captions */
 figcaption {
   text-align: center;
   font-size: 0.9em;
-  color: var(--vp-c-text-2); /* Uses VitePress theme's secondary text color */
+  color: var(--vp-c-text-2); /* VitePress secondary text color */
   margin-top: 0.5rem;
 }
 
-/* Ensures the image itself stays centered */
+/* center image within figure */
 figure img {
   margin: 0 auto;
 }
 </style>
 
-
-- [Why does my Java version matter and what's a "JVM"?](#why-does-my-java-version-matter-and-whats-a-jvm)
+- [Why does my Java version matter and what&#39;s a &#34;JVM&#34;?](#why-does-my-java-version-matter-and-whats-a-jvm)
 - [Which Java Distribution Should I Choose?](#which-java-distribution-should-i-choose)
 - [Upgrading Java](#upgrading-java)
-    - [Prism](#prism)
-    - [CurseForge](#curseforge)
+  - [Prism](#prism)
+  - [CurseForge](#curseforge)
 
 # Improving TFG Performance via Upgrading the JVM
+
 game hitching every couple of seconds? crashing due to an "out of memory error" or "could not allocate"? unsatisfied with how much ram the the modpack uses? some of these problems can be ameliorated or eliminated (probably not the last one) by upgrading your java version!
+
+
+> [!WARNING]
+> Technical details ahead! If you don't care about how upgrading your Java version improves performance and just want the quick fix, skip ahead to [Upgrading Java](#upgrading-java)
+
 ## Why Does My Java Version Matter? And What's a "JVM"?
+
 Great question! Your java version matters because of how Minecraft is compiled and ran on your computer. Java (the programming language) was designed to be "written once, ran anywhere" (WORA). This is why Minecraft, which is written in Java, can run on Linux, MacOS, and Windows. How does Java do this? Via the Java Virtual Machine, or JVM! In a nutshell, the JVM takes compiled Java bytecode and executes it...
+
 - java version matters because each java version comes with jvm upgrades that could potentially improve performance
 - primary performance improvement will come from garbage collector upgrades
 - should explain what garbage collector is and why it's important
-  - primary improvements with newer jvm are the addition of ZGC and generational garbage collection
 
+  - primary improvements with newer jvm are the addition of ZGC and generational garbage collection
 - java 17 uses the G1 garbage collector by default, which is "mostly concurrent" which means that it performs most of its garbage collection in the background while the application is running, but still needs to occasionally occupy the main thread to free up space (which leads to hitching)
 - [G1GC Technical Overview](https://www.oracle.com/java/technologies/javase/hotspot-garbage-collection.html)
 - [ZGC Deep Dive](https://dl.acm.org/doi/full/10.1145/3538532)
-
 - G1: aims for low pause times, but "low" is relative. for Minecraft, where any pause times greater than a hundredth of a second are noticeable and disruptive, G1 is no longer the best choice
+
   - Low pause times for small heaps, but large heaps lead to performance degradation due to needing more time to garbage collect
   - MC has very large heap, so G1 needs more time to collect, leading to long pauses -> hitching every so often
-
 - ZGC: super low latency, does most of its garbage collection concurrently, only stops execution of application threads for < 10 ms when needed
+
   - there are some tradeoffs to using ZGC, but not ones relevant to MC
 
 essentially upgrading your java version gives you access to better garbage collection which will generally reduce lag and frame hitching. Each new java version also comes with more technical improvements to the JVM, which will generally improve performance with zero downsides.
@@ -55,12 +63,25 @@ however, with each new java version comes the possibiltiy of breaking changes be
 
 ## Which Java Distribution Should I Choose?
 
-
 ## Upgrading Java
+
 ### Prism
+
+
+::: details TLDR
+1. Download the latest version of [Adoptium Eclipse Temurin JRE 21](https://adoptium.net/temurin/releases?version=21&os=any&arch=any) and set its path as your instance's Java executable
+2. Enable "Skip Java Compatibility Checks"
+3. Copy these into your Java arguments:
+  ```
+  -XX:+UseZGC
+  -XX:+ZGenerational
+  ```
+:::
+
 1. Open your instance's Edit window and navigate to the Settings tab.
 2. In the Settings Tab, click on the Java subtab.
 3. In the "Java Installation" section, click on the "Open Java Downloader" button.
+
 
 <figure>
   <img src="../assets/modpack/the-jvm-and-tfg/instance_java_settings_screen.png" alt="A descriptive description for accessibility">
@@ -68,7 +89,7 @@ however, with each new java version comes the possibiltiy of breaking changes be
 </figure>
 
 4. At the bottom of the Install Java Wizard, uncheck the "Recommended" checkbox. This allows us to download Java versions that are not officially supported by our Minecraft install.
-5. Click on **Adoptium** in the leftmost column, then **Java 21** in the Major Version column, then select the latest version of **Eclipse Temurin JRE 21**, which will be at the very top of the rightmost column. 
+5. Click on **Adoptium** in the leftmost column, then **Java 21** in the Major Version column, then select the latest version of **Eclipse Temurin JRE 21**, which will be at the very top of the rightmost column.
 
 <figure>
   <img src="../assets/modpack/the-jvm-and-tfg/install_java_wizard.png" alt="A descriptive description for accessibility">
@@ -84,5 +105,7 @@ however, with each new java version comes the possibiltiy of breaking changes be
 </figure>
 
 WIP
+
 ### CurseForge
+
 WIP

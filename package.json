@@ -9,6 +9,7 @@
     "predev": "pnpm prepare-docs",
     "prebuild": "pnpm prepare-docs",
     "dev": "vitepress dev",
+    "dev:quick": "cross-env TFG_QUICK_DEV=1 vitepress dev",
     "build": "vitepress build",
     "preview": "vitepress preview"
   },

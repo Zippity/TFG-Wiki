@@ -1,5 +1,8 @@
 import { defineConfig } from 'vitepress'
-import { withSidebar, type VitePressSidebarOptions } from 'vitepress-sidebar'
+
+import { withSidebar } from 'vitepress-sidebar'
+import type { VitePressSidebarOptions } from 'vitepress-sidebar/types'
+
 import { withMermaid } from 'vitepress-plugin-mermaid'
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
@@ -74,106 +77,115 @@ function localeEntry(locale: Locale) {
 
 const rootEntry = localeEntry(DEFAULT_LOCALE)
 
-export default withMermaid(
-  defineConfig(
-    withSidebar(
-      {
-      srcDir: BUILD_DOCS_REL,
-      theme: resolve(__dirname, 'theme/index.ts'),
-      vite: {
-        publicDir: resolve(__dirname, '..', 'public'),
-        ssr: {
-          external: ['svg-pan-zoom', 'vitepress-plugin-mermaid-pan-zoom'],
-        },
-        optimizeDeps: {
-          include: ['mermaid'],
-          exclude: ['vitepress'],
-        },
-        define: {
-          'import.meta.env.VITE_EXTRA_EXTENSIONS': JSON.stringify('html'),
-        },
-        plugins: [
-          homeEditLinkPlugin(resolve(WIKI_ROOT, 'docs'), UI, GITHUB_REPO),
-          pageIndexPlugin(BUILD_DOCS),
-        ],
-      },
-      title: SITE_TITLE,
-      description: SITE_DESCRIPTION,
-      lang: rootEntry.lang,
-      base: '/',
-      cleanUrls: true,
-      lastUpdated: true,
-      ignoreDeadLinks: buildWikiDeadLinkIgnores(),
-      appearance: {
-        storageKey: 'tfg-theme',
-      },
+export default () => {
+  // Modify content directory and path based on the mode to allow for HMR editing
+  // quick mode sacrifices localization building in exchange for live updates to dev build
+  const quickDev = process.env.TFG_QUICK_DEV === '1'
+  const contentDir = quickDev ? 'docs' : BUILD_DOCS_REL
 
-      head: [
-        ['script', {}, buildVitePressBootstrapScript()],
-        ['link', { rel: 'icon', type: 'image/png', href: '/favicon.png' }],
-        ['meta', { name: 'theme-color', content: '#ff0e0b' }],
-        ['meta', { name: 'robots', content: 'index, follow' }],
-        ['meta', { property: 'og:type', content: 'website' }],
-        ['meta', { property: 'og:site_name', content: SITE_TITLE }],
-        ['meta', { property: 'og:description', content: SITE_DESCRIPTION }],
-        ['meta', { property: 'og:image', content: OG_IMAGE }],
-        ['meta', { name: 'twitter:card', content: 'summary' }],
-        ['meta', { name: 'twitter:site', content: '@TerraFirmaGreg' }],
-        ['script', { type: 'application/ld+json' }, buildWebSiteJsonLd(SITE_URL)],
-      ],
-
-      transformHead({ page, title, description }) {
-        const head = buildPageSeoHead(SITE_URL, page, title, description, OG_IMAGE)
-        if (page === 'index.md') {
-          head.push(['script', {}, buildLocaleRedirectScript()])
-        }
-        return head
-      },
-
-      transformPageData(pageData) {
-        if (pageData.frontmatter?.untranslated === true) {
-          return {
-            editLink: {
-              pattern: CROWDIN_WIKI_URL,
-              text: UNTRANSLATED_CROWDIN_LINK,
+  return withMermaid(
+    defineConfig(
+      withSidebar(
+        {
+          // srcDir depends on mode. if quickDev is true, use 'docs' for live updates; otherwise, use the build docs relative path.
+          srcDir: contentDir,
+          theme: resolve(__dirname, 'theme/index.ts'),
+          vite: {
+            publicDir: resolve(__dirname, '..', 'public'),
+            ssr: {
+              external: ['svg-pan-zoom', 'vitepress-plugin-mermaid-pan-zoom'],
             },
-          }
-        }
-      },
-
-      sitemap: {
-        hostname: SITE_URL,
-        transformItems(items) {
-          return transformWikiSitemapItems(SITE_URL, items)
-        },
-      },
-
-      themeConfig: {
-        logo: { src: '/logo.png', alt: 'TFG', height: 32 },
-        search: buildSearchOptions(UI, LOCALES, NAMESPACE, DEFAULT_LOCALE),
-        socialLinks: [
-          { icon: 'github', link: `https://github.com/${GITHUB_REPO}` },
-          { icon: 'discord', link: 'https://discord.com/invite/AEaCzCTUwQ' },
-        ],
-        externalLinkIcon: true,
-      },
-
-      locales: {
-        root: {
-          label: rootEntry.label,
+            optimizeDeps: {
+              include: ['mermaid'],
+              exclude: ['vitepress'],
+            },
+            define: {
+              'import.meta.env.VITE_EXTRA_EXTENSIONS': JSON.stringify('html'),
+            },
+            plugins: [
+              homeEditLinkPlugin(resolve(WIKI_ROOT, 'docs'), UI, GITHUB_REPO),
+              // if quickDev, returns the path to the live 'docs' directory; otherwise, returns the path to the built docs directory.
+              pageIndexPlugin(resolve(WIKI_ROOT, contentDir)),
+            ],
+          },
+          title: SITE_TITLE,
+          description: SITE_DESCRIPTION,
           lang: rootEntry.lang,
-          link: rootEntry.link,
-          themeConfig: rootEntry.themeConfig,
+          base: '/',
+          cleanUrls: true,
+          lastUpdated: true,
+          ignoreDeadLinks: buildWikiDeadLinkIgnores(),
+          appearance: {
+            storageKey: 'tfg-theme',
+          },
+
+          head: [
+            ['script', {}, buildVitePressBootstrapScript()],
+            ['link', { rel: 'icon', type: 'image/png', href: '/favicon.png' }],
+            ['meta', { name: 'theme-color', content: '#ff0e0b' }],
+            ['meta', { name: 'robots', content: 'index, follow' }],
+            ['meta', { property: 'og:type', content: 'website' }],
+            ['meta', { property: 'og:site_name', content: SITE_TITLE }],
+            ['meta', { property: 'og:description', content: SITE_DESCRIPTION }],
+            ['meta', { property: 'og:image', content: OG_IMAGE }],
+            ['meta', { name: 'twitter:card', content: 'summary' }],
+            ['meta', { name: 'twitter:site', content: '@TerraFirmaGreg' }],
+            ['script', { type: 'application/ld+json' }, buildWebSiteJsonLd(SITE_URL)],
+          ],
+
+          transformHead({ page, title, description }) {
+            const head = buildPageSeoHead(SITE_URL, page, title, description, OG_IMAGE)
+            if (page === 'index.md') {
+              head.push(['script', {}, buildLocaleRedirectScript()])
+            }
+            return head
+          },
+
+          transformPageData(pageData) {
+            if (pageData.frontmatter?.untranslated === true) {
+              return {
+                editLink: {
+                  pattern: CROWDIN_WIKI_URL,
+                  text: UNTRANSLATED_CROWDIN_LINK,
+                },
+              }
+            }
+          },
+
+          sitemap: {
+            hostname: SITE_URL,
+            transformItems(items) {
+              return transformWikiSitemapItems(SITE_URL, items)
+            },
+          },
+
+          themeConfig: {
+            logo: { src: '/logo.png', alt: 'TFG', height: 32 },
+            search: buildSearchOptions(UI, LOCALES, NAMESPACE, DEFAULT_LOCALE),
+            socialLinks: [
+              { icon: 'github', link: `https://github.com/${GITHUB_REPO}` },
+              { icon: 'discord', link: 'https://discord.com/invite/AEaCzCTUwQ' },
+            ],
+            externalLinkIcon: true,
+          },
+
+          locales: {
+            root: {
+              label: rootEntry.label,
+              lang: rootEntry.lang,
+              link: rootEntry.link,
+              themeConfig: rootEntry.themeConfig,
+            },
+            ...Object.fromEntries(
+              LOCALES.filter((locale) => locale !== DEFAULT_LOCALE).map((locale) => [
+                `${NAMESPACE}/${locale}`,
+                localeEntry(locale),
+              ]),
+            ),
+          },
         },
-        ...Object.fromEntries(
-          LOCALES.filter((locale) => locale !== DEFAULT_LOCALE).map((locale) => [
-            `${NAMESPACE}/${locale}`,
-            localeEntry(locale),
-          ]),
-        ),
-      },
-      },
-      LOCALES.map((locale) => sidebarOptions(locale)),
+        LOCALES.map((locale) => sidebarOptions(locale)),
+      ),
     ),
-  ),
-)
+  )
+}

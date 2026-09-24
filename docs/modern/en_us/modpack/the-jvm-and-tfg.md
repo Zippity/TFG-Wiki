@@ -2,6 +2,26 @@
 title: Improving Performance via the JVM
 order: 3
 ---
+<style scoped>
+/* Center all figures and their captions */
+figure {
+  text-align: center;
+  margin: 1.5rem auto;
+}
+
+figcaption {
+  text-align: center;
+  font-size: 0.9em;
+  color: var(--vp-c-text-2); /* Uses VitePress theme's secondary text color */
+  margin-top: 0.5rem;
+}
+
+/* Ensures the image itself stays centered */
+figure img {
+  margin: 0 auto;
+}
+</style>
+
 
 - [Why does my Java version matter and what's a "JVM"?](#why-does-my-java-version-matter-and-whats-a-jvm)
 - [Which Java Distribution Should I Choose?](#which-java-distribution-should-i-choose)
@@ -10,9 +30,9 @@ order: 3
     - [CurseForge](#curseforge)
 
 # Improving TFG Performance via Upgrading the JVM
-game hitching every couple of seconds? crashing due to an "out of memory error" or "could not allocate"? unsatisfied with how much ram the the modpack uses? some of these problems can be ameliorated or eliminated by upgrading your java version!
-## Why does my Java version matter and what's a "JVM"?
-Great question! Your java version matters because of how Minecraft is compiled and ranon your computer. Java (the programming language) was designed to be "written once, ran anywhere" (WORA). This is why Minecraft, which is written in Java, can run on Linux, MacOS, and Windows. How does Java do this? Via the Java Virtual Machine, or JVM! In a nutshell, the JVM takes compiled Java bytecode and executes it...
+game hitching every couple of seconds? crashing due to an "out of memory error" or "could not allocate"? unsatisfied with how much ram the the modpack uses? some of these problems can be ameliorated or eliminated (probably not the last one) by upgrading your java version!
+## Why Does My Java Version Matter? And What's a "JVM"?
+Great question! Your java version matters because of how Minecraft is compiled and ran on your computer. Java (the programming language) was designed to be "written once, ran anywhere" (WORA). This is why Minecraft, which is written in Java, can run on Linux, MacOS, and Windows. How does Java do this? Via the Java Virtual Machine, or JVM! In a nutshell, the JVM takes compiled Java bytecode and executes it...
 - java version matters because each java version comes with jvm upgrades that could potentially improve performance
 - primary performance improvement will come from garbage collector upgrades
 - should explain what garbage collector is and why it's important
@@ -44,15 +64,23 @@ however, with each new java version comes the possibiltiy of breaking changes be
 
 <figure>
   <img src="../assets/modpack/the-jvm-and-tfg/instance_java_settings_screen.png" alt="A descriptive description for accessibility">
-  <figcaption>Caption 1</figcaption>
+  <figcaption>If you already have a newer java runtime installed, you can set it as your java executable here.</figcaption>
 </figure>
 
 4. At the bottom of the Install Java Wizard, uncheck the "Recommended" checkbox. This allows us to download Java versions that are not officially supported by our Minecraft install.
-5. Click on Adoptium in the leftmost column, then Java 21 in the Major Version column, then select the latest version of Eclipse Temurin JRE 21, which will be at the very top of the rightmost column. 
+5. Click on **Adoptium** in the leftmost column, then **Java 21** in the Major Version column, then select the latest version of **Eclipse Temurin JRE 21**, which will be at the very top of the rightmost column. 
 
 <figure>
   <img src="../assets/modpack/the-jvm-and-tfg/install_java_wizard.png" alt="A descriptive description for accessibility">
-  <figcaption>Caption 2</figcaption>
+  <figcaption>You're free to use any runtime you'd like, but this is what the TFG team recommends.</figcaption>
+</figure>
+
+6. Once the runtime is finished downloading, Prism will automatically close the Java Install Wizard and you will return back to your instance's Edit window. In "Java Installation", click the "Detect" button underneath the "Java Executable" text bar.
+7. Select the java version you just downloaded. In my case, I downloaded **Java 21.0.12.8**, so I will select Version **21.0.12**. Click "OK".
+
+<figure>
+  <img src="../assets/modpack/the-jvm-and-tfg/select_java_version.png" alt="A descriptive description for accessibility">
+  <figcaption>You're free to use any runtime you'd like, but this is what the TFG team recommends.</figcaption>
 </figure>
 
 WIP

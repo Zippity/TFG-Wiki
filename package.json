@@ -15,6 +15,8 @@
   "devDependencies": {
     "@braintree/sanitize-url": "^7.1.2",
     "@giscus/vue": "^3.1.0",
+    "@types/node": "^26.6.2",
+    "cross-env": "^10.1.0",
     "cytoscape": "^3.34.0",
     "cytoscape-cose-bilkent": "^4.1.0",
     "dayjs": "^1.11.21",

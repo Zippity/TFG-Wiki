@@ -38,6 +38,23 @@ however, with each new java version comes the possibiltiy of breaking changes be
 
 ## Upgrading Java
 ### Prism
+1. Open your instance's Edit window and navigate to the Settings tab.
+2. In the Settings Tab, click on the Java subtab.
+3. In the "Java Installation" section, click on the "Open Java Downloader" button.
+
+<figure>
+  <img src="../assets/modpack/the-jvm-and-tfg/instance_java_settings_screen.png" alt="A descriptive description for accessibility">
+  <figcaption>Caption 1</figcaption>
+</figure>
+
+4. At the bottom of the Install Java Wizard, uncheck the "Recommended" checkbox. This allows us to download Java versions that are not officially supported by our Minecraft install.
+5. Click on Adoptium in the leftmost column, then Java 21 in the Major Version column, then select the latest version of Eclipse Temurin JRE 21, which will be at the very top of the rightmost column. 
+
+<figure>
+  <img src="../assets/modpack/the-jvm-and-tfg/install_java_wizard.png" alt="A descriptive description for accessibility">
+  <figcaption>Caption 2</figcaption>
+</figure>
+
 WIP
 ### CurseForge
 WIP

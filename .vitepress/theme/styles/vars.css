@@ -15,3 +15,10 @@
     --header-text-shadow: rgba(0, 0, 0, 0.8);
     --header-fade-border: rgb(255 255 255 / 0.19);
 }
+
+figcaption {
+  text-align: center;
+  font-size: 0.9em;
+  color: var(--vp-c-text-2); /* Uses VitePress theme's secondary text color */
+  margin-top: 0.5rem;
+}

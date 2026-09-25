@@ -69,13 +69,14 @@ however, with each new java version comes the possibiltiy of breaking changes be
 
 
 ::: details TLDR
-1. Download the latest version of [Adoptium Eclipse Temurin JRE 21](https://adoptium.net/temurin/releases?version=21&os=any&arch=any) and set its path as your instance's Java executable
+1. Download the latest version of Adoptium Eclipse Temurin JRE 21 through Prism Launcher's Install Java Wizard or by downloading it [here](https://adoptium.net/temurin/releases?version=21&os=any&arch=any). Set its path as your instance's Java executable
 2. Enable "Skip Java Compatibility Checks"
 3. Copy these into your Java arguments:
   ```
   -XX:+UseZGC
   -XX:+ZGenerational
   ```
+4. You're good to go!
 :::
 
 1. Open your instance's Edit window and navigate to the Settings tab.

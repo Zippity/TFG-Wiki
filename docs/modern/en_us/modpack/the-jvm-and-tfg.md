@@ -23,21 +23,22 @@ figure img {
 }
 </style>
 
-- [Why does my Java version matter and what&#39;s a &#34;JVM&#34;?](#why-does-my-java-version-matter-and-whats-a-jvm)
-- [Which Java Distribution Should I Choose?](#which-java-distribution-should-i-choose)
-- [Upgrading Java](#upgrading-java)
-  - [Prism](#prism)
-  - [CurseForge](#curseforge)
-
 # Improving TFG Performance via Upgrading the JVM
 
-game hitching every couple of seconds? crashing due to an "out of memory error" or "could not allocate"? unsatisfied with how much ram the the modpack uses? some of these problems can be ameliorated or eliminated (probably not the last one) by upgrading your java version!
+[[toc]]
 
+Is your game hitching every couple of seconds? Is your game crashing due to an "out of memory error" or "could not allocate"? Are you an Arch user and crashing on startup? This article could be the answer! In this article we discuss:
+ - How to upgrade your Minecraft instance's Java version
+ - Which Java arguments will improve performance
+ - Why upgrading your Java version and why Java arguments matter for Minecraft performance
 
-> [!WARNING]
-> Technical details ahead! If you don't care about how upgrading your Java version improves performance and just want the quick fix, skip ahead to [Upgrading Java](#upgrading-java)
+::: warning NERD STUFF INCOMING
+The following section discusses technical details about the Java Virtual Machine. If you only want to improve performance and don't care about the details, skip ahead to [Upgrading Java](#upgrading-java).
+:::
 
-## Why Does My Java Version Matter? And What's a "JVM"?
+## Background
+
+### Why Does My Java Version Matter? And What's a "JVM"?
 
 Great question! Your java version matters because of how Minecraft is compiled and ran on your computer. Java (the programming language) was designed to be "written once, ran anywhere" (WORA). This is why Minecraft, which is written in Java, can run on Linux, MacOS, and Windows. How does Java do this? Via the Java Virtual Machine, or JVM! In a nutshell, the JVM takes compiled Java bytecode and executes it...
 
@@ -61,16 +62,23 @@ essentially upgrading your java version gives you access to better garbage colle
 
 however, with each new java version comes the possibiltiy of breaking changes between versions. this almost definitely will not be an issue between java 17 and java 21, but the same cannot be said for newer versions like Java 26.
 
-## Which Java Distribution Should I Choose?
+### If Bigger Java Version Number = More Good, Why Not Use Java 26?
+
+Because each version of Minecraft is built with a specific Java version in mind, and newer versions of Java may have breaking changes that cause incompatibilities between versions. Java 26 changes some things on the backend that 1.20.1 mods rely on, meaning that when mods built with Java 17 in mind try to access methods that have been changed in Java 26, stuff breaks and your game crashes.
+
+### Which Java Distribution Should I Choose?
+
+Whichever you'd like! There are many vendors that offer essentially the same thing, which is a packaged build of the Java Runtime Environment. We recommend Adoptium, as they are the leading free and open source vendor for Java runtimes. 
+
+If you want that little extra bit of performance, there is also GraalVM, which is offered by Oracle. GraalVM uses advanced techniques to optimize Java programs for better performance. For Minecraft, this performance improvement is likely to be marginal and usage of GraalVM as the JVM is unnecessary for most players. But if you're running a server or are severely hardware-constrained, it may provide a small performance boost. However **in most cases Adoptium is more than good enough**.
 
 ## Upgrading Java
 
 ### Prism
 
-
 ::: details TLDR
-1. Download the latest version of Adoptium Eclipse Temurin JRE 21 through Prism Launcher's Install Java Wizard or by downloading it [here](https://adoptium.net/temurin/releases?version=21&os=any&arch=any). Set its path as your instance's Java executable
-2. Enable "Skip Java Compatibility Checks"
+1. Download the latest version of Adoptium Eclipse Temurin JRE 21 through Prism Launcher's **Install Java Wizard** or by downloading it from [Adoptium's website.](https://adoptium.net/temurin/releases?version=21&os=any&arch=any) Set its path as your instance's Java executable.
+2. Enable "Skip Java Compatibility Checks".
 3. Copy these into your Java arguments:
   ```
   -XX:+UseZGC
@@ -79,34 +87,51 @@ however, with each new java version comes the possibiltiy of breaking changes be
 4. You're good to go!
 :::
 
-1. Open your instance's Edit window and navigate to the Settings tab.
-2. In the Settings Tab, click on the Java subtab.
+1. Open your instance's **Edit** window and navigate to the **Settings** tab.
+2. In the **Settings** Tab, click on the **Java** subtab.
 3. In the "Java Installation" section, click on the "Open Java Downloader" button.
 
 
 <figure>
-  <img src="../assets/modpack/the-jvm-and-tfg/instance_java_settings_screen.png" alt="A descriptive description for accessibility">
-  <figcaption>If you already have a newer java runtime installed, you can set it as your java executable here.</figcaption>
+  <img src="https://raw.githubusercontent.com/TerraFirmaGreg-Team/.github/2ba9f7033bc7e9c117df6ac008e1d8de2bc7ccdf/wiki/en_us/modpack/the-jvm-and-tfg/instance_java_settings_screen.png" alt="placeholder">
+  <figcaption>If you already have a newer Java version installed, you can also set it as your Java executable here.</figcaption>
 </figure>
 
 4. At the bottom of the Install Java Wizard, uncheck the "Recommended" checkbox. This allows us to download Java versions that are not officially supported by our Minecraft install.
+
 5. Click on **Adoptium** in the leftmost column, then **Java 21** in the Major Version column, then select the latest version of **Eclipse Temurin JRE 21**, which will be at the very top of the rightmost column.
 
 <figure>
-  <img src="../assets/modpack/the-jvm-and-tfg/install_java_wizard.png" alt="A descriptive description for accessibility">
+  <img src="https://github.com/TerraFirmaGreg-Team/.github/blob/main/wiki/en_us/modpack/the-jvm-and-tfg/install_java_wizard.png?raw=true" alt="placeholder">
   <figcaption>You're free to use any runtime you'd like, but this is what the TFG team recommends.</figcaption>
 </figure>
 
-6. Once the runtime is finished downloading, Prism will automatically close the Java Install Wizard and you will return back to your instance's Edit window. In "Java Installation", click the "Detect" button underneath the "Java Executable" text bar.
-7. Select the java version you just downloaded. In my case, I downloaded **Java 21.0.12.8**, so I will select Version **21.0.12**. Click "OK".
+6. Once the runtime is finished downloading, Prism will automatically close the Java Install Wizard and return you back to your instance's Edit window. In "Java Installation", click the "Detect" button underneath the "Java Executable" text field.
 
 <figure>
-  <img src="../assets/modpack/the-jvm-and-tfg/select_java_version.png" alt="A descriptive description for accessibility">
-  <figcaption>You're free to use any runtime you'd like, but this is what the TFG team recommends.</figcaption>
+  <img src="https://github.com/TerraFirmaGreg-Team/.github/blob/main/wiki/en_us/modpack/the-jvm-and-tfg/instance_java_detect.png?raw=true" alt="placeholder">
+  <figcaption>If you already know the path to your new Java executable, you can paste it into the text field as well.</figcaption>
 </figure>
 
-WIP
+7. Select the Java version you just downloaded. In my case, I downloaded **Java 21.0.12.8**, so I will select Version **21.0.12**. Click "OK".
+
+<figure>
+  <img src="https://github.com/TerraFirmaGreg-Team/.github/blob/main/wiki/en_us/modpack/the-jvm-and-tfg/select_java_version.png?raw=true" alt="placeholder">
+  <figcaption>placeholder</figcaption>
+</figure>
+
+8. Check "Skip Java compatibility checks", check "Java Arguments" and paste these commands into the arguments field:
+```
+-XX:+UseZGC
+-XX:+ZGenerational
+```
+Lastly, click "Test Settings" to confirm that everything is working correctly. If you see a test success window, then congratulations! You've successfully upgraded your game's Java version.
+
+<figure>
+  <img src="https://github.com/TerraFirmaGreg-Team/.github/blob/main/wiki/en_us/modpack/the-jvm-and-tfg/skip_checks_args_test.png?raw=true" alt="placeholder">
+  <figcaption>placeholder</figcaption>
+</figure>
 
 ### CurseForge
 
-WIP
+If you'd like to contribute a guide for CurseForge, reach out on Discord! We'd love to have your contribution!

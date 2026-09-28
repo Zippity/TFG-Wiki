@@ -40,7 +40,25 @@ The following section discusses technical details about the Java Virtual Machine
 
 ### Why Does My Java Version Matter? And What's a "JVM"?
 
-Great question! Your java version matters because of how Minecraft is compiled and ran on your computer. Java (the programming language) was designed to be "written once, ran anywhere" (WORA). This is why Minecraft, which is written in Java, can run on Linux, MacOS, and Windows. How does Java do this? Via the Java Virtual Machine, or JVM! In a nutshell, the JVM takes compiled Java bytecode and executes it...
+Great question! Your java version matters because of how Minecraft is compiled and ran on your computer. 
+
+You may have heard of "compiled programming languages". These are languages that need to be compiled to execute code on your computer. Compilation is essentially translating human-readable source code into machine code that the computer can understand. Java is also compiled, but not into raw machine code. Instead, it is translated into "byte code", which is an intermediary step between raw machine code and source code. This byte code is then executed by the **Java Virtual Machine**, or JVM. 
+
+The JVM acts as a translation layer between your computer's bare metal hardware and the platform-agnostic Java byte code. This allows Java to run on many different machines without needing to be compiled to each individual computer. But as a consequence of this, the JVM is crucial for program performance. A poorly optimized JVM makes for a slower program, which makes for a poor experience for the end user. But as Java has developed over its 35-year lifespan, the language has matured and so has its JVM. With new versions of Java came optimizations and improvements made to the JVM, allowing Java programs to make better use of your computer's resources. In 2026, the JVM is quite good! By default it's pretty fast and allows Java to be used for a variety of use cases, even games like Minecraft.
+
+So in short, **your Java version matters because newer versions run on more efficient JVM's that allow Minecraft to run faster.**
+
+### Why Should I Upgrade my Java Version? Will Things Break?
+
+Because you'll get access to a better JVM. More specifically, you'll get access to new memory management systems that come with newer versions of the JVM.
+
+Minecraft's primary performance bottleneck is its memory usage. Java is garbage-collected language, meaning that when a program no longer needs access to a piece of data, that data is purged from memory by a system within the JVM called the **Garbage Collector**. But the garbage collector isn't actually told when data is freed. It has to periodically scan the heap (a fancy name for program memory), and when it has determined that data is no longer being referenced by any other part of the program, it can be safely freed and that part of the heap can be reused for something else.
+
+The garbage collector only runs when the JVM determines that there is a need for more memory. When the heap gets close to its maximum capacity, the garbage collector is triggered and performs a scan of the heap for regions that can be safely disposed of. This process can be very taxing on both the CPU and on your system's memory, which is why Minecraft hitches when a garbage collection sweep is running. The garbage collector is taking control of the game's main thread to determine which memory is free, which takes time.
+
+The developers of the JVM were very smart when they designed the default Java garbage collector, G1. It was designed to handle (comparatively) large amounts of memory while also not taking overly long to scan that memory when a garbage collection sweep is triggered. But G1 was not designed for games, nor was it designed for the power of modern processors. G1 was designed in a time where having 2 GB of total memory was considered a lot. Nowadays, most people have 16 GB or more, and they have processors with multiple cores that can perform many tasks in parallel.
+
+The JVM version that we recommend is Java 21, which is nearly 100% backwards-compatible with Java 17. Nothing written with Java 17 in mind will break because it was run by a JVM built on Java 21.
 
 - java version matters because each java version comes with jvm upgrades that could potentially improve performance
 - primary performance improvement will come from garbage collector upgrades
@@ -62,9 +80,11 @@ essentially upgrading your java version gives you access to better garbage colle
 
 however, with each new java version comes the possibiltiy of breaking changes between versions. this almost definitely will not be an issue between java 17 and java 21, but the same cannot be said for newer versions like Java 26.
 
-### If Bigger Java Version Number = More Good, Why Not Use Java 26?
+### If Bigger Number = Bigger Frames, Why Not Use Java 26?
 
 Because each version of Minecraft is built with a specific Java version in mind, and newer versions of Java may have breaking changes that cause incompatibilities between versions. Java 26 changes some things on the backend that 1.20.1 mods rely on, meaning that when mods built with Java 17 in mind try to access methods that have been changed in Java 26, stuff breaks and your game crashes.
+
+### What are "Java Arguments"? Which Ones Should I Use?
 
 ### Which Java Distribution Should I Choose?
 

@@ -18,7 +18,7 @@ You can do this with most launchers, but do **not** update these mods:
 - *Drippy Loading Screen & FancyMenu* - they currently have [a bug](https://github.com/Keksuccino/Drippy-Loading-Screen/issues/118) that makes our loading screen's progress bar look weird. If/when that's fixed then these should be ok to update.
 - *KubeJS* - Version 2001.6.5-build.26 broke the API for edible/drinkable items. If they ever sort their shit out, it's ok to update this.
 - *PandaLib & Panda's Falling Trees* - **never update this!** Newer versions completely changed how it detects trees, and broke it working with TFC ones. This is fixed on the 1.21 version of these mods, but the author doesn't support 1.20 any more (to avoid breaking anything else). We also have a lot of TFG-Core mixins around this version.
-- *TFC Astikor Carts* - **never update this!** Newer versions don't work with the mixins TFG-Core has, and don't contain anything new that we'd want anyway.
+- *TFC Astikor Carts & AstikorCarts Redux* - **never update this!** Newer versions don't work with the mixins TFG-Core has, and don't contain anything new that we'd want anyway.
 - *ModernFix* - Causes issues with item stacking and wooden buckets not working after version (5.27.51).
 - *TooManyRecipeViewers* - Causes lag spikes when viewing recipes after version (0.8.1).
 
@@ -72,15 +72,11 @@ In Tools-Modern, there's a tool named PakkuLockChecker. It will go through your 
 
 It's normal for a lot of mods to be missing from modrinth, and for a few mods to have version mismatches, so you only really need to look out for the important ones like TFG-Core and so on.
 
-## 6. Run the language merger
-
-Sync the Tools-Modern repo and run the LanguageMerger tool. This will ensure that the modpack has all of the latest changes to the english text. Commit the `en_us` json files in the modpack afterwards.
-
-## 7. Wait for TFG-Core 
+## 6. Wait for TFG-Core 
 
 Keep doing `java -jar pakku.jar update TerraFirmaGreg-Core` until your pakku-lock.json file has the correct versions for both curseforge and modrinth. The PakkuLockChecker tool may also be useful here.
 
-## 8. Launch the modpack a final time
+## 7. Launch the modpack a final time
 
 If your minecraft instance and workspace are separate folders (as they should be), copy over your config and defaultconfigs folders to your instance and launch the game a final time.
 
@@ -88,7 +84,7 @@ Run some quick tests like opening your test world, checking `/kjs errors server_
 
 If everything's all good, copy the `config/crash_assistant/modlist.json` file from your instance back into your workspace. This file is used in Crash Assistant error reports to say what mod changes the user has made.
 
-## 9. Run a linux server test
+## 8. Run a linux server test
 
 Make sure everything you've changed in the modpack is published to `dev`, then wait for the [build system](https://github.com/TerraFirmaGreg-Team/Modpack-Modern/actions) to finish making a build.
 
@@ -96,7 +92,7 @@ Get someone with a linux server (tom and sakura can both do this) to download th
 
 You can maybe skip this step if you're doing a small but urgent publish with a bunch of recipe hotfixes or something, but if it's not urgent, it's good to test this.
 
-## 10. Final steps
+## 9. Final steps
 
 If this is your first time publishing, make sure you have another experienced dev check all of your steps before continuing!
 

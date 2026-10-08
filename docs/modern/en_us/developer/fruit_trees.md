@@ -50,5 +50,5 @@ Run `runData` to generate blockstate, model, and loot jsons.
 ### Step 5) Field Guide
 - Add field guide entries for each new tree in their respective dimension category.
 
-## [Tools Repo Side](https://github.com/TerraFirmaGreg-Team/Tools-Modern)
-- Add lang strings for everything.
+### Step 6) Language Strings
+- Add lang strings for everything [in here](https://github.com/TerraFirmaGreg-Team/Modpack-Modern/tree/dev/kubejs/assets/tfg/lang/en_us).

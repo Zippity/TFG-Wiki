@@ -59,9 +59,10 @@ Run `runData` to generate blockstate, model, and loot jsons.
 ### Step 5) Field Guide
 - Add field guide entries for each new tree in their respective dimension category.
 
+### Step 6
+- Add lang strings for everything [in here](https://github.com/TerraFirmaGreg-Team/Modpack-Modern/tree/dev/kubejs/assets/tfg/lang/en_us).
+
 ### Optional*)
 - Firmalife Greenhouse planter information is automatically generated using the enum. But you can change the register [here](https://github.com/TerraFirmaGreg-Team/Modpack-Modern/blob/f64e735e44db247b3c044ac31f7462046b5d0233/kubejs/server_scripts/tfg/food/data.planters.js#L233).
 - Electric Greenhouse recipes are automatically generated using the enum. But you can change the register [here](https://github.com/TerraFirmaGreg-Team/Modpack-Modern/blob/f64e735e44db247b3c044ac31f7462046b5d0233/kubejs/server_scripts/tfg/aquaponics/recipes.greenhouse.js#L529).
 
-## [Tools Repo Side](https://github.com/TerraFirmaGreg-Team/Tools-Modern)
-- Add lang strings for everything [like so](https://github.com/TerraFirmaGreg-Team/Tools-Modern/pull/500/changes)

@@ -25,7 +25,7 @@ In general, we will not hold you accountable for personal stylistic choices in y
     <summary> Info </summary>
 
 There are no strict organization principles in our repositories. For most purposes try to use common sense when deciding where things should go. But at the very least, please try to follow these rules:
-- **No hard-coded text!** Lang strings should be used in all relevant places and submitted to our [Tools Repository](https://github.com/TerraFirmaGreg-Team/Tools-Modern/tree/dev/LanguageMerger) for translation.
+- **No hard-coded text!** Lang strings should be used in all relevant places and submitted to our [Language Folder](https://github.com/TerraFirmaGreg-Team/Modpack-Modern/tree/dev/kubejs/assets/tfg/lang/en_us) for translation.
 - Custom GT machines/multiblocks should be submitted in our [Core Mod](https://github.com/TerraFirmaGreg-Team/Core-Modern) instead of done through KubeJS.
 - Recipes, basic items/blocks, materials, data, assets, loot, etc. Should be submitted through [Kubejs](https://github.com/TerraFirmaGreg-Team/Modpack-Modern/tree/dev/kubejs) instead of in our core mod when most convenient.
 - All custom recipes, assets, items, blocks, etc. Should be in the `tfg:` namespace when possible.
@@ -42,15 +42,7 @@ Please make a new branch for each pull request and keep submissions focused on o
 
 </details>
 
-### <span style="color:gray">d.</span> AI Use/ Disclosure
-<details open>
-    <summary> Info </summary>
-
-The use of Artificial Intelligence or more specifically LLM's is not allowed when contributing to TerraFirmaGreg-Modern, our core mod, or translations. We understand that LLM's may provide help in diagnosing issues or peer-reviewing translation work, and we may begrudgingly accept such use. But in general all code must be at least 90% written by you, 100% of assets must be man-made, and all work must be checked by you. If you do not understand programming when using AI, do not submit your work to us we do not want it. If you have used AI to assist in diagnosing issues or writing challenging sections of code, then you must always disclose of such use for us to review. We may ask for sections to be rewritten if they do not meet our standards for non-slop. And we may completely reject your pull requests if we feel there is enough evidence for AI use. If we find that you have used AI extensively without disclosing of such, you may be banned from our repository. We have a reputation to uphold; we will not allow non-human work to taint our quality standards.
-
-</details>
-
-### <span style="color:gray">e.</span> Art Direction
+### <span style="color:gray">d.</span> Art Direction
 <details open>
     <summary> Info </summary>
 
@@ -58,7 +50,7 @@ We take our art direction and vision for our pack seriously. It is important to 
 
 </details>
 
-### <span style="color:gray">f.</span> Coding Standards
+### <span style="color:gray">e.</span> Coding Standards
 <details open>
     <summary> Info </summary>
 
@@ -72,6 +64,14 @@ Although stylistic preferences are allowed to vary, it is important to maintain 
 - When creating recipes or functions, attempt to use [Tags](https://minecraft.wiki/w/Tag_(Java_Edition)) instead of hard-coded items. This can make your code more flexible and less prone to breaking as items change over time.
 
 </details>
+</details>
+
+## <ModernHeader fade><GradientText> AI Use / Disclosure </GradientText></ModernHeader>
+<details>
+    <summary> Info </summary>
+
+The use of Artificial Intelligence or more specifically LLM's is not allowed when contributing to TerraFirmaGreg-Modern, our core mod, or translations. We understand that LLM's may provide help in diagnosing issues or peer-reviewing translation work, and we may begrudgingly accept such use. But in general all code must be at least 90% written by you, 100% of assets must be man-made, and all work must be checked by you. If you do not understand programming when using AI, do not submit your work to us we do not want it. If you have used AI to assist in diagnosing issues or writing challenging sections of code, then you must always disclose of such use for us to review. We may ask for sections to be rewritten if they do not meet our standards for non-slop. And we may completely reject your pull requests if we feel there is enough evidence for AI use. If we find that you have used AI extensively without disclosing of such, you may be banned from our repository. We have a reputation to uphold; we will not allow non-human work to taint our quality standards.
+
 </details>
 
 ## <ModernHeader fade><GradientText> Outside Resources </GradientText></ModernHeader>
@@ -486,7 +486,7 @@ Creation steps will vary wildly between different types of projects. However, fo
 2. Place assets for your new item in the appropriate folders within the `assets` directory. Ensure that the assets follow the same name and file path as the item itself or the custom path you specified in the item registration. KubeJS will automatically create basic models, so typically you only need to provide a texture.
 3. In `server_scripts.js` create recipes for your new item. Make sure to use tags when possible and give each recipe a unique ID.
 4. If you want to add a custom tooltip to your item, then you can do it in `client_scripts.js`.
-5. Submit lang strings for your new item (and your custom tooltip if applicable) to our [Tools Repository](https://github.com/TerraFirmaGreg-Team/Tools-Modern/tree/dev/LanguageMerger).
+5. Submit lang strings for your new item (and your custom tooltip if applicable) to our [Language Folder](https://github.com/TerraFirmaGreg-Team/Modpack-Modern/tree/dev/kubejs/assets/tfg/lang/en_us).
 6. Test all your changes and then commit them to your branch. Then submit a pull request to the TFG `dev` branch for review.
 
 >[!TIP]
